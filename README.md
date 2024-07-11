@@ -1,6 +1,6 @@
 Basado en el el video de Nechubm. (Gracias) 
 
-# 📚🗨️  preguntaDOC: Convierte tus documentos en conversaciones con chatGPT
+# 📚🗨️  preguntaDOC es ahora ragapp-chatgpt: Convierte tus documentos en conversaciones con chatGPT
 
 :link: [Web demo](https://nechubm-preguntadoc-app-tutorial-ct21ps.streamlit.app/)
 
