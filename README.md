@@ -1,14 +1,6 @@
-Basado en el el video de Nechubm. (Gracias) 
+## ragapp-chatgpt: Convierte tus documentos en conversaciones con chatGPT
 
-# 📚🗨️ PreguntaDOC es ahora ragapp-chatgpt: Convierte tus documentos en conversaciones con chatGPT
-
-Te recomiendo ver el video de Nechu primero para entender mejor el funcionamiento y luego te detengas a ver el código de esta aplicacion con las nuevas funcionalidades.
-
-Por Nechubm: (Video tutorial y demo de la version anterior)
-:link: [Video tutorial](https://youtu.be/iDrpdkIHMq8)
-:link: [Web demo](https://nechubm-preguntadoc-app-tutorial-ct21ps.streamlit.app/)
-
-A diferencia de la version anterior, esta version requiere que crees un archivo .env con las siguientes variables:
+Esta version requiere que crees un archivo .env con las siguientes variables:
 
 >OPENAI_API_KEY= "tu_api_key"
 
@@ -27,10 +19,13 @@ La libreria de FAISS es una libreria que permite hacer consultas y funciona muy 
 Se hizo un refactoring del codigo con las nuevas funcionalidades:
 
 1. Historial de preguntas:
-2. Empezar una conversacion nueva con el bot:
-3. Persistencia de sesiones de conversacion 
-4. Carga de variables de entorno desde un archivo.env
-5. Limpieza de variable de ingreso de la pregunta luego del submit
+2. Persistencia de sesiones de conversacion 
+3. Carga de variables de entorno desde un archivo.env
+
+
+Para ejecutar la aplicacion:
+
+>streamlit run app.py
 
 Jose Valerio
 
