@@ -38,19 +38,7 @@ def create_embeddings(pdf):
     knowledge_base = FAISS.from_texts(chunks, embeddings)
 
     return knowledge_base
-
-# if pdf_obj:
-#     knowledge_base = create_embeddings(pdf_obj)
-#     user_question = st.text_input("Haz una pregunta sobre tu PDF:")
-
-#     if user_question:
-#         os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
-#         docs = knowledge_base.similarity_search(user_question, 3)
-#         llm = ChatOpenAI(model_name='gpt-3.5-turbo')
-#         chain = load_qa_chain(llm, chain_type="stuff")
-#         respuesta = chain.run(input_documents=docs, question=user_question)
-
-#         st.write(respuesta)    
+  
 if pdf_obj:
     knowledge_base = create_embeddings(pdf_obj)
     
@@ -67,25 +55,29 @@ if pdf_obj:
     # Use session state to store and display chat history
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
+
+    if "user_question" not in st.session_state:
+        st.session_state.user_question = ""
     
     # Create a form for user input
     with st.form(key='question_form'):
-        user_question = st.text_input("Haz una pregunta sobre tu PDF:")
-        #submit_button = st.form_submit_button("Submit")
-        submit_button = st.form_submit_button("Submit")
+        user_question = st.text_input("Haz una pregunta sobre tu PDF:", value=st.session_state.user_question)
+        submit_button = st.form_submit_button("Consultar")
 
     if submit_button and user_question:
         os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
-        
         response = qa_chain({"question": user_question})
         st.session_state.chat_history.append(("Human", user_question))
         st.session_state.chat_history.append(("AI", response['answer']))
-    else:
+        # Clear the input field
+        st.session_state.user_question = ""
+    elif submit_button and not user_question:
         st.warning("Por favor, introduce una pregunta.")
 
     # Add the "Start Over" button
-    if st.button("Start Over"):
+    if st.button("Borrar historial"):
         st.session_state.chat_history = []
+        st.session_state.user_question = ""
         st.rerun()
 
     # Display chat history
