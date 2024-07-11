@@ -72,11 +72,7 @@ if pdf_obj:
     with st.form(key='question_form'):
         user_question = st.text_input("Haz una pregunta sobre tu PDF:")
         #submit_button = st.form_submit_button("Submit")
-        col1, col2 = st.columns(2)
-        with col1:
-            submit_button = st.form_submit_button("Submit")
-        with col2:
-            clear_button = st.form_submit_button("Clear")
+        submit_button = st.form_submit_button("Submit")
 
     if submit_button and user_question:
         os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
@@ -84,7 +80,14 @@ if pdf_obj:
         response = qa_chain({"question": user_question})
         st.session_state.chat_history.append(("Human", user_question))
         st.session_state.chat_history.append(("AI", response['answer']))
-    
+    else:
+        st.warning("Por favor, introduce una pregunta.")
+
+    # Add the "Start Over" button
+    if st.button("Start Over"):
+        st.session_state.chat_history = []
+        st.rerun()
+
     # Display chat history
     for role, message in st.session_state.chat_history:
         st.write(f"{role}: {message}")
